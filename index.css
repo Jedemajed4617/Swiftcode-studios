@@ -1,0 +1,222 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+    color: inherit;
+    text-decoration: none;
+}
+
+.header__container {
+    width: 100%;
+    height: 7rem;
+    display: flex;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    background-color: #10419d;
+}
+
+.header__navbar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__navItems {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header__navLinks {
+    font-size: 1.7rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    padding: 0.3rem;
+}
+
+.header__navLinks:hover {
+    background-color: #011b4c;
+    transform: rotate(3deg);
+}
+
+.header__navLogin {
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    padding: 0.3rem;
+}
+
+.header__navLogin:hover {
+    background-color: #011b4c;
+    transform: rotate(-3deg);
+    cursor: pointer;
+}
+
+.header__imgContainer {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.header__imgContainer img {
+    width: 100%;
+    height: 100%;
+}
+
+/* PhoneNavigation */
+
+.header__phoneNav {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Start off-screen to the left */
+    width: 250px;
+    height: 100%;
+    background-color: #011b4c;
+    padding-top: 60px;
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+    transition: left 0.4s ease-in-out; /* Change transition property to "left" */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header__phoneNav li {
+    padding: 2rem 0;
+}
+
+.header__phoneNav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.header__mobileNav {
+    display: none;
+}
+
+/* Styles for the open phone navigation */
+.phoneNavOpen {
+    left: 0;
+}
+
+#openPhoneNav {
+    height: auto;
+    font-size: 2rem;
+    border: none;
+    background-color: inherit;
+    color: white;
+}
+
+.header__phoneNavButton {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header__closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+}
+
+#closePhoneNav {
+    font-size: 1.5rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+    .header__navItems {
+        gap: 2rem;
+    }
+
+    .header__navLinks {
+        font-size: 1.3rem;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header__navItems {
+        display: none;
+    }
+
+    .header__mobileNav {
+        display: block;
+    }
+
+    .header__container {
+        width: 100%;
+        height: 5rem;
+        padding-left: 1.5rem;
+        padding-right: 0;
+    }
+}
+
+/* Slogan/img homepage */
+
+.slogan__container {
+    width: 100%;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+}
+
+.slogan__imgContainer {
+    width: 90vw;
+    height: 100%;
+    padding: 2rem;
+    border-bottom: 2px solid #10419d;
+}
+
+.slogan__img {
+    width: 100%;
+    height: 100%;
+    background-image: url("./img/un.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border-radius: 2rem;
+    border-bottom-right-radius: 0;
+}
+
+.slogan__imgCaption {
+    width: 20rem;
+    height: auto;
+    background-color: white;
+    padding: 1rem;
+    border-bottom: 4px solid #5992E3;
+    border-right: 4px solid #5992E3;
+    border-radius: 1rem;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+}
