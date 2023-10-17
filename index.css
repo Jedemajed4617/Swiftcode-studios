@@ -70,8 +70,8 @@ li {
 }
 
 .header__imgContainer {
-    width: 6rem;
-    height: 6rem;
+    width: 5rem;
+    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,6 +163,17 @@ li {
         font-size: 1.3rem;
         padding: 0;
     }
+    .header__imgContainer{
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+@media screen and (max-width: 1000px) { 
+    .header__imgContainer{
+        width: 4rem;
+        height: 4rem;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -179,6 +190,7 @@ li {
         height: 5rem;
         padding-left: 1.5rem;
         padding-right: 0;
+        position: fixed;
     }
 }
 
@@ -224,6 +236,12 @@ li {
     border-top-left-radius: 0;
 }
 
+@media screen and (max-width: 450px){
+    .slogan__container{
+        padding-top: 4rem;
+    } 
+}
+
 /* HOMEPAGE CONTENT */
 
 .homepage__container {
@@ -265,10 +283,109 @@ li {
 }
 
 .homepage__featured-cards{
-    width: 20rem;
-    height: 20rem;
+    width: 18rem;
+    height: 15rem;
     background-color: #5992E3;
-    border-radius: 4rem;
+    border-radius: 2rem;
+    color: white;
+}
+
+.homepage__headingContainer{
+    width: 100%;
+    height: 10%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage__Heading{
+    width: 100%;
+    height: 100%;
+    font-size: 1.1rem;
+    padding: 0.2rem;
+    text-align: center;
+}
+
+.homepage__imgContainer{
+    width: 100%;
+    height: 90%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+.homepage__img{
+    width: 10rem;
+    height: auto;
+    border-radius: 1rem;
+}
+
+/* LOGIN PAGE: */
+.login__container{
+    width: 100%;
+    height: 32rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__formcontainer{
+    width: 60vw;
+    height: 100%;
+}   
+
+.login__form{
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 4rem;
+    align-items: center;
+}
+
+.login__input{
+    width: 20rem;
+    height: 2rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #10419d;
+    padding: 0.2rem;
+}
+
+.login__buttoncontainer{
+    width: 100%;
+    height: 10rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.login__button{
+    width: 12rem;
+    height: 3rem;
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.4rem;
+    border-bottom: 1px solid #10419d;
+}
+
+.login__button:hover{
+    cursor: pointer;
+}
+
+.login__usercontainer{
+    padding-bottom: 1.5rem;
+}
+
+.login__passcontainer{
+    padding-bottom: 1.5rem;
+}
+
+.login__register{
+    font-size: 0.8rem;
 }
 
 
@@ -276,7 +393,7 @@ li {
 
 .footer__container {
     width: 100%;
-    height: 20rem;
+    height: 25rem;
     display: flex;
     flex-direction: column;
     background-color: #10419d;
@@ -322,7 +439,7 @@ li {
 .footer__listFormTitle {
     width: 100%;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-align: left;
     padding-bottom: 0.6rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -371,6 +488,14 @@ li {
 .footer__list {
     width: calc(100%/3);
     height: 100%;
+}
+
+.footer__listLinkContainer{
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .socials{
@@ -441,7 +566,7 @@ li {
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .footer__container {
         flex-direction: column;
         height: auto;
@@ -463,5 +588,21 @@ li {
 
     .footer__list {
         width: 100%;
+    }
+
+    .footer__listLinkA{
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .footer__listSocials{
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .footer__listLinkContainer{
+        display: none;
     }
 }

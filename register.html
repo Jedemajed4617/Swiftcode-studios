@@ -62,18 +62,26 @@
         <div class="login__formcontainer">
             <form class="login__form" action="login.php">
                 <label class="login__usercontainer" for="user">
-                    <p>Username / Email:</p>
+                    <p>Email:</p>
+                    <input id="user" class="login__input" type="text" required>
+                </label>
+                <label class="login__usercontainer" for="user">
+                    <p>Username:</p>
                     <input id="user" class="login__input" type="text" required>
                 </label>
                 <label class="login__passcontainer" for="pass">
                     <p>Password:</p>
                     <input id="pass" class="login__input" type="text" required>
                 </label>
+                <label class="login__passcontainer" for="pass">
+                    <p>Repeat password:</p>
+                    <input id="pass" class="login__input" type="text" required>
+                </label>
                 <div>
-                    <p class="login__register">Heb je nog geen account? <a style="text-decoration: underline;" href="./register.html">Registreer hier.</a></p>
+                    <p class="login__register">heb je al een account? <a style="text-decoration: underline;" href="./login.html">Log in hier.</a></p>
                 </div>
                 <label class="login__buttoncontainer" for="button">
-                    <button id="button" class="login__button" type="submit">Inloggen</button>
+                    <button id="button" class="login__button" type="submit">Registreer</button>
                 </label>
             </form>
         </div>
