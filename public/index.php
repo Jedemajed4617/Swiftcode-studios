@@ -69,10 +69,38 @@
         </div>
         <div class="homepage__container-cards">
             <div class="homepage__featured-cardscontainer">
-                <ul class="homepage__featured-cards"></ul>
-                <ul class="homepage__featured-cards"></ul>
-                <ul class="homepage__featured-cards"></ul>
-                <ul class="homepage__featured-cards"></ul>
+                <ul class="homepage__featured-cards">
+                    <div class="homepage__headingContainer">
+                        <h1 class="homepage__Heading">Geen armoede</h1>
+                    </div>
+                    <div class="homepage__imgContainer">
+                        <img class="homepage__img" src="./img/armoede.webp" alt="">
+                    </div>
+                </ul>
+                <ul class="homepage__featured-cards">
+                    <div class="homepage__headingContainer">
+                        <h1 class="homepage__Heading">Betaalbare Energie</h1>
+                    </div>
+                    <div class="homepage__imgContainer">
+                        <img class="homepage__img" src="./img/energie.webp" alt="">
+                    </div>
+                </ul>
+                <ul class="homepage__featured-cards">
+                    <div class="homepage__headingContainer">
+                        <h1 class="homepage__Heading">Klimaatactie</h1>
+                    </div>
+                    <div class="homepage__imgContainer">
+                        <img class="homepage__img" src="./img/klimaat.webp" alt="">
+                    </div>
+                </ul>
+                <ul class="homepage__featured-cards">
+                    <div class="homepage__headingContainer">
+                        <h1 class="homepage__Heading">Ongelijkheid verminderen</h1>
+                    </div>
+                    <div class="homepage__imgContainer">
+                        <img class="homepage__img" src="./img/ongelijkheid.webp" alt="">
+                    </div>
+                </ul>
             </div>
         </div>
     </section>
