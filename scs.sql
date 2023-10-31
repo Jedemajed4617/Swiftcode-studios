@@ -25,7 +25,27 @@ CREATE TABLE IF NOT EXISTS `featured` (
   `img` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table SwiftCodeStudios.featured: ~17 rows (approximately)
+INSERT INTO `featured` (`id`, `img`, `title`) VALUES
+	(1, 'armoede.webp', 'Geen Armoede'),
+	(2, 'honger.webp', 'Geen honger'),
+	(3, 'gezondheid.webp', 'Goede gezondheid'),
+	(4, 'onderwijs.webp', 'Kwaliteitsonderwijs'),
+	(5, 'gender.webp', 'Gendergelijkheid'),
+	(6, 'water.webp', 'Schoon water'),
+	(7, 'energie.webp', 'Betaalbare energie'),
+	(8, 'economie.webp', 'Economische groei'),
+	(9, 'industrie.webp', 'Innovatie'),
+	(10, 'ongelijkheid.webp', 'Ongelijkheid verminderen'),
+	(11, 'duurzaam.webp', 'Duurzame Gemeenschappen'),
+	(12, 'consumptie.webp', 'Verantwoorde consumptie'),
+	(13, 'klimaat.webp', 'Klimaatactie'),
+	(14, 'water.webp', 'Leven in het water'),
+	(15, 'land.webp', 'Leven op het land'),
+	(16, 'vrede.webp', 'Vrede'),
+	(17, 'doelen.webp', 'Partnerschap voor doelen');
 
 -- Dumping data for table SwiftCodeStudios.featured: ~0 rows (approximately)
 
