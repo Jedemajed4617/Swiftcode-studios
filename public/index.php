@@ -1,5 +1,5 @@
 <?php
-@include_once("/src/db_conn.php");
+include_once("../src/db_conn.php");
 ?>
 
 <!DOCTYPE html>
