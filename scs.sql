@@ -58,6 +58,25 @@ CREATE TABLE IF NOT EXISTS `sdg` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO `sdg` (`id`, `img`, `title`, `info`) VALUES
+	(1, 'armoede.webp', 'Geen Armoede', 'Beëindig armoede overal en in al haar vormen'),
+	(2, 'honger.webp', 'Geen honger', 'Beëindig honger, bereik voedselzekerheid en verbeterde voeding en promoot duurzame landbouw'),
+	(3, 'gezondheid.webp', 'Goede gezondheid', 'Verzeker een goede gezondheid en promoot welzijn voor alle leeftijden'),
+	(4, 'onderwijs.webp', 'Kwaliteitsonderwijs', 'Verzeker gelijke toegang tot kwaliteitsvol onderwijs en bevorder levenslang leren voor iedereen'),
+	(5, 'gender.webp', 'Gendergelijkheid', 'Bereik gendergelijkheid en empowerment voor alle vrouwen en meisjes'),
+	(6, 'water.webp', 'Schoon water', 'Verzeker toegang tot duurzaam beheer van water en sanitatie voor iedereen'),
+	(7, 'energie.webp', 'Betaalbare energie', 'Verzeker toegang tot betaalbare, betrouwbare, duurzame en moderne energie voor iedereen'),
+	(8, 'economie.webp', 'Economische groei', 'Bevorder aanhoudende, inclusieve en duurzame economische groei, volledige en productieve tewerkstelling en waardig werk voor iedereen'),
+	(9, 'industrie.webp', 'Innovatie', 'Bouw veerkrachtige infrastructuur, bevorder inclusieve en duurzame industrialisering en stimuleer innovatie'),
+	(10, 'ongelijkheid.webp', 'Ongelijkheid verminderen', 'Dring ongelijkheid in en tussen landen terug'),
+	(11, 'duurzaam.webp', 'Duurzame Gemeenschappen', 'Maak steden en menselijke nederzettingen inclusief, veilig, veerkrachtig en duurzaam'),
+	(12, 'consumptie.webp', 'Verantwoorde consumptie', 'Verzeker duurzame consumptie- en productiepatronen'),
+	(13, 'klimaat.webp', 'Klimaatactie', 'Neem dringend actie om klimaatverandering en haar impact te bestrijden'),
+	(14, 'water.webp', 'Leven in het water', 'Doel 14: Behoud en maak duurzaam gebruik van oceanen, zeeën en maritieme hulpbronnen'),
+	(15, 'land.webp', 'Leven op het land', 'Bescherm, herstel en bevorder het duurzaam gebruik van ecosystemen op het vasteland, beheer bossen en wouden duurzaam, bestrijd woestijnvorming, stop landdegradatie en draai het terug en roep het verlies aan biodiversiteit een halt toe'),
+	(16, 'vrede.webp', 'Vrede', 'Bevorder vreedzame en inclusieve samenlevingen met het oog op duurzame ontwikkeling, verzeker toegang tot justitie voor iedereen en bouw op alle niveaus doeltreffende, verantwoordelijke en toegankelijke instellingen uit'),
+	(17, 'doelen.webp', 'Partnerschap voor doelen', 'Versterk de implementatiemiddelen en revitaliseer het wereldwijd partnerschap voor duurzame ontwikkeling');
+
 -- Dumping data for table SwiftCodeStudios.sdg: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
