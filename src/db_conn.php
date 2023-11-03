@@ -1,7 +1,7 @@
 <?php
 $servername = "mariadb";
 $username = "root";
-$password = "4dy5qwtrsag#!sad";
+$password = "your_password";
 $dbname = "SwiftCodeStudios";
 
 // Create connection in mysqli
