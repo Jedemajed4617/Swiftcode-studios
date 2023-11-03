@@ -1,3 +1,36 @@
+<?php
+require_once("../../src/db_conn.php");
+
+session_start();
+include("../functions.php");
+
+$pfp = GetPfpById($mysqli, $username);
+
+if (isset($_SESSION["id"])) {
+    header("location: ../profile/profile.php");
+} 
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+    $email = $_POST['email'];
+
+    $sql = "INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("sss", $username, $password, $email);
+
+    if ($stmt->execute()) {
+        $_SESSION['account_succes'] = true;
+        header("location: /login/login.php");
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +42,9 @@
     <link rel="stylesheet" href="/src/css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans&family=Montserrat:ital,wght@0,300;0,400;1,200&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inclusive+Sans&family=Montserrat:ital,wght@0,300;0,400;1,200&display=swap"
+        rel="stylesheet">
     <script src="/src/js/index.js" defer></script>
     <link rel="icon" type="image/x-icon" href="/src/img/un-favicon.webp">
 </head>
@@ -28,8 +63,24 @@
                     <li><a href="../sdg/sdg.php">SDG's</a></li>
                     <li><a href="../info/info.php">Informatie</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <?php
+                        if (isset($_SESSION["id"])) {
+                    ?>
+                    <li><a href="../profile/profile.php">Profile</a></li>
+                    <?php
+                        } 
+                        if (!isset($_SESSION["id"])) {
+                    ?>
                     <li><a href="../login/login.php">Login</a></li>
-                    <li class="header__closeButton"><button id="closePhoneNav" aria-label="Close Mobile Navigation">&#10006;</button></li>
+                    <?php
+                        } else {
+                    ?>
+                    <li><a href="/logout.php">Logout</a></li>
+                    <?php
+                        }
+                    ?>
+                    <li class="header__closeButton"><button id="closePhoneNav"
+                            aria-label="Close Mobile Navigation">&#10006;</button></li>
                 </ul>
             </div>
 
@@ -44,7 +95,7 @@
             </ul>
 
             <ul class="header__navItems">
-                <li class="header__navLogin"><a href="../login/login.php" aria-label="Login"><i class="fa-regular fa-user"></i></a></li>
+                <li class="header__navLogin"><a href="<?php if (isset($_SESSION["id"])) { ?>../login/login.php<?php } else{ ?> ../profile/profile.php <?php } ?>" aria-label="Login"><i class="fa-regular fa-user"></i></a></li>
             </ul>
         </nav>
     </header>
@@ -53,7 +104,8 @@
         <div class="slogan__imgContainer">
             <figure class="slogan__img">
                 <p class="slogan__imgCaption">
-                    VN Forum is het digitale tijdschrift van de Nederlandse Vereniging voor de Verenigde Naties (NVVN). Doelstelling is het vergroten van kennis over de werking en invloed van de Verenigde Naties.
+                    VN Forum is het digitale tijdschrift van de Nederlandse Vereniging voor de Verenigde Naties (NVVN).
+                    Doelstelling is het vergroten van kennis over de werking en invloed van de Verenigde Naties.
                 </p>
             </figure>
         </div>
@@ -61,28 +113,29 @@
 
     <section class="login__container">
         <div class="login__formcontainer">
-            <form class="login__form" action="login.php">
-                <label class="login__usercontainer" for="user">
-                    <p>Email:</p>
-                    <input id="user" class="login__input" type="text" required>
-                </label>
-                <label class="login__usercontainer" for="user">
+            <form class="login__form" action="register.php" method="POST">
+                <label class="login__usercontainer" for="username">
                     <p>Username:</p>
-                    <input id="user" class="login__input" type="text" required>
+                    <input id="username" class="login__input" type="text" name="username" required>
                 </label>
-                <label class="login__passcontainer" for="pass">
+                <label class="login__usercontainer" for="email">
+                    <p>Email:</p>
+                    <input id="email" class="login__input" type="text" name="email" required>
+                </label>
+                <label class="login__passcontainer" for="password">
                     <p>Password:</p>
-                    <input id="pass" class="login__input" type="text" required>
+                    <input id="password" class="login__input" type="password" name="password" required>
                 </label>
-                <label class="login__passcontainer" for="pass">
+                <label class="login__passcontainer" for="confirm_password">
                     <p>Repeat password:</p>
-                    <input id="pass" class="login__input" type="text" required>
+                    <input id="confirm_password" class="login__input" type="password" name="confirm_password" required>
                 </label>
                 <div>
-                    <p class="login__register">heb je al een account? <a style="text-decoration: underline;" href="../login/login.php">Log in hier.</a></p>
+                    <p class="login__register">Already have an account? <a style="text-decoration: underline;"
+                            href="../login/login.php">Log in here.</a></p>
                 </div>
                 <label class="login__buttoncontainer" for="button">
-                    <button id="button" class="login__button" type="submit">Registreer</button>
+                    <button id="button" class="login__button" type="submit">Register</button>
                 </label>
             </form>
         </div>
@@ -95,7 +148,8 @@
                     <p class="footer__listFormTitle">Neem contact met ons op!</p>
                     <input class="footer__listFormEmail" type="email" name="" id="" placeholder="Uw Email">
                     <input class="footer__listFormNaam" type="text" placeholder="Uw Naam">
-                    <textarea class="footer__listFormOpmerking" name="" id="" cols="30" rows="4" placeholder=" Uw Vraag/opmerking"></textarea>
+                    <textarea class="footer__listFormOpmerking" name="" id="" cols="30" rows="4"
+                        placeholder=" Uw Vraag/opmerking"></textarea>
                     <button class="footer__listFormButton" type="submit">Verstuur</button>
                 </form>
             </ul>
@@ -104,20 +158,53 @@
                 <li class="footer__listLinks"><a href="../about/about.php" class="footer__listLinkA">Over Ons</a></li>
                 <li class="footer__listLinks"><a href="../sdg/sdg.php" class="footer__listLinkA">SDG's</a></li>
                 <li class="footer__listLinks"><a href="../info/info.php" class="footer__listLinkA">Informatie</a></li>
+                <?php 
+                    if (!isset($_SESSION["id"])) {
+                ?>
                 <li class="footer__listLinks"><a href="../login/login.php" class="footer__listLinkA">Login</a></li>
+                <?php
+                    } else {
+                ?>
+                <li class="footer__listLinks"><a href="/logout.php" class="footer__listLinkA">Logout</a></li>
+                <?php
+                    }
+                ?>
             </ul>
             <ul class="footer__list socials">
                 <li class="footer__listSocials">
-                    <a target="_blank" href="https://www.facebook.com/UNANetherlands"><i class="fa-brands fa-facebook"></i><p>Facebook</p></a>
-                    <a target="_blank" href="https://www.instagram.com/nederlandse_vereniging_vn/"><i class="fa-brands fa-instagram"></i><p>Instagram</p></a>
-                    <a target="_blank" href="https://podcasts.apple.com/nl/podcast/de-vn-podcast/id1647809707?l=en%20"><i class="fa-solid fa-podcast"></i><p>Apple Podcast</p></a>
-                    <a target="_blank" href="https://open.spotify.com/show/5Sgn01M9cgJJygGyPT9prc"><i class="fa-brands fa-spotify"></i><p>Spotify</p></a>
+                    <a target="_blank" href="https://www.facebook.com/UNANetherlands"><i
+                            class="fa-brands fa-facebook"></i>
+                        <p>Facebook</p>
+                    </a>
+                    <a target="_blank" href="https://www.instagram.com/nederlandse_vereniging_vn/"><i
+                            class="fa-brands fa-instagram"></i>
+                        <p>Instagram</p>
+                    </a>
+                    <a target="_blank"
+                        href="https://podcasts.apple.com/nl/podcast/de-vn-podcast/id1647809707?l=en%20"><i
+                            class="fa-solid fa-podcast"></i>
+                        <p>Apple Podcast</p>
+                    </a>
+                    <a target="_blank" href="https://open.spotify.com/show/5Sgn01M9cgJJygGyPT9prc"><i
+                            class="fa-brands fa-spotify"></i>
+                        <p>Spotify</p>
+                    </a>
                 </li>
                 <li class="footer__listSocials">
-                    <a target="_blank" href="https://twitter.com/UNANL"><i class="fa-brands fa-x-twitter"></i><p>Twitter</p></a>
-                    <a target="_blank" href="https://www.linkedin.com/company/nederlandse-vereniging-voor-de-verenigde-naties"><i class="fa-brands fa-linkedin"></i><p>LinkedIn</p></a>
-                    <a target="_blank" href="mailto:info@nvvn.nl"><i class="fa-regular fa-envelope"></i><p>Email</p></a>
-                    <a target="_blank" href="https://tiktok.com/@nvvn_nl"><i class="fa-brands fa-tiktok"></i><p>Tiktok</p></a>
+                    <a target="_blank" href="https://twitter.com/UNANL"><i class="fa-brands fa-x-twitter"></i>
+                        <p>Twitter</p>
+                    </a>
+                    <a target="_blank"
+                        href="https://www.linkedin.com/company/nederlandse-vereniging-voor-de-verenigde-naties"><i
+                            class="fa-brands fa-linkedin"></i>
+                        <p>LinkedIn</p>
+                    </a>
+                    <a target="_blank" href="mailto:info@nvvn.nl"><i class="fa-regular fa-envelope"></i>
+                        <p>Email</p>
+                    </a>
+                    <a target="_blank" href="https://tiktok.com/@nvvn_nl"><i class="fa-brands fa-tiktok"></i>
+                        <p>Tiktok</p>
+                    </a>
                 </li>
             </ul>
         </div>
