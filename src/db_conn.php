@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "mariadb";
 $username = "root";
 $password = "4dy5qwtrsag#!sad";
 $dbname = "SwiftCodeStudios";

@@ -1,5 +1,24 @@
 <?php
-@include_once("/src/db_conn.php");
+require_once("../src/db_conn.php");
+include("functions.php");
+
+session_start();
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    $username = null; // Set to a default value if the session is not active
+}
+
+$pfp = GetPfpById($mysqli, $username);
+
+// Fetch random cards from the database
+$query = "SELECT * FROM featured ORDER BY RAND() LIMIT 4"; // Change the LIMIT value as needed
+$result = $mysqli->query($query);
+$cards = array();
+while ($row = $result->fetch_assoc()) {
+    $cards[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +46,27 @@
                     <button id="openPhoneNav" aria-label="Toggle Mobile Navigation">&#9776;</button>
                 </div>
                 <ul class="header__phoneNav" aria-label="Mobile Navigation Menu">
-                    <li><a href="../index.php">Home</a></li>
+                    <li><a href="/index.php">Home</a></li>
                     <li><a href="./about/about.php">Over ons</a></li>
                     <li><a href="./sdg/sdg.php">SDG's</a></li>
                     <li><a href="./info/info.php">Informatie</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="./login/login.php">Login</a></li>
+                    <?php
+                        if (isset($_SESSION["id"])) {
+                    ?>
+                    <li><a href="../profile/profile.php">Profile</a></li>
+                    <?php
+                        } 
+                        if (!isset($_SESSION["id"])) {
+                    ?>
+                    <li><a href="../login/login.php">Login</a></li>
+                    <?php
+                        } else {
+                    ?>
+                    <li><a href="/logout.php">Logout</a></li>
+                    <?php
+                        }
+                    ?>
                     <li class="header__closeButton"><button id="closePhoneNav" aria-label="Close Mobile Navigation">&#10006;</button></li>
                 </ul>
             </div>
@@ -48,7 +82,7 @@
             </ul>
 
             <ul class="header__navItems">
-                <li class="header__navLogin"><a href="./login/login.php" aria-label="Login"><i class="fa-regular fa-user"></i></a></li>
+                <li class="header__navLogin"><a href="<?php if (isset($_SESSION["id"])) { echo "/profile/profile.php"; } else{ echo "/login/login.php"; } ?>" aria-label="Login"><?php if (!isset($_SESSION['username'])) { ?><i class="fa-regular fa-user animation__profile"></i><?php } else{ ?> <img class="peetje17" src="../src/pfp/<?php echo $pfp; ?>" alt="" srcset=""> <p style="font-size: 1rem; text-align: center;"><?php echo $username; ?></p><?php } ?></a></li>
             </ul>
         </nav>
     </header>
@@ -69,38 +103,16 @@
         </div>
         <div class="homepage__container-cards">
             <div class="homepage__featured-cardscontainer">
-                <ul class="homepage__featured-cards">
-                    <div class="homepage__headingContainer">
-                        <h1 class="homepage__Heading">Geen armoede</h1>
-                    </div>
-                    <div class="homepage__imgContainer">
-                        <img class="homepage__img" src="./img/armoede.webp" alt="">
-                    </div>
-                </ul>
-                <ul class="homepage__featured-cards">
-                    <div class="homepage__headingContainer">
-                        <h1 class="homepage__Heading">Betaalbare Energie</h1>
-                    </div>
-                    <div class="homepage__imgContainer">
-                        <img class="homepage__img" src="./img/energie.webp" alt="">
-                    </div>
-                </ul>
-                <ul class="homepage__featured-cards">
-                    <div class="homepage__headingContainer">
-                        <h1 class="homepage__Heading">Klimaatactie</h1>
-                    </div>
-                    <div class="homepage__imgContainer">
-                        <img class="homepage__img" src="./img/klimaat.webp" alt="">
-                    </div>
-                </ul>
-                <ul class="homepage__featured-cards">
-                    <div class="homepage__headingContainer">
-                        <h1 class="homepage__Heading">Ongelijkheid verminderen</h1>
-                    </div>
-                    <div class="homepage__imgContainer">
-                        <img class="homepage__img" src="./img/ongelijkheid.webp" alt="">
-                    </div>
-                </ul>
+                <?php foreach ($cards as $card): ?>
+                    <ul class="homepage__featured-cards homepage__fade-in">
+                        <div class="homepage__headingContainer">
+                            <h1 class="homepage__Heading"><?= htmlspecialchars($card['title']) ?></h1>
+                        </div>
+                        <div class="homepage__imgContainer">
+                            <img class="homepage__img" src="/src/img/<?= htmlspecialchars($card['img']) ?>" alt="">
+                        </div>
+                    </ul>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -121,7 +133,17 @@
                 <li class="footer__listLinks"><a href="./about/about.php" class="footer__listLinkA">Over Ons</a></li>
                 <li class="footer__listLinks"><a href="./sdg/sdg.php" class="footer__listLinkA">SDG's</a></li>
                 <li class="footer__listLinks"><a href="./info/info.php" class="footer__listLinkA">Informatie</a></li>
-                <li class="footer__listLinks"><a href="./login/login.php" class="footer__listLinkA">Login</a></li>
+                <?php 
+                    if (!isset($_SESSION["id"])) {
+                ?>
+                <li class="footer__listLinks"><a href="../login/login.php" class="footer__listLinkA">Login</a></li>
+                <?php
+                    } else {
+                ?>
+                <li class="footer__listLinks"><a href="/logout.php" class="footer__listLinkA">Logout</a></li>
+                <?php
+                    }
+                ?>
             </ul>
             <ul class="footer__list socials">
                 <li class="footer__listSocials">

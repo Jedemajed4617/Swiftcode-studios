@@ -16,6 +16,16 @@ li {
     text-decoration: none;
 }
 
+/* ADDITIONAL STYLING */
+
+.peetje17{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+/* HEADER */
+
 .header__container {
     width: 100%;
     height: 7rem;
@@ -60,6 +70,11 @@ li {
     align-items: center;
     width: auto;
     height: auto;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+}
+
+.animation__profile{
     transition: background-color 0.3s ease, transform 0.3s ease;
     padding: 0.3rem;
     border-radius: 0.2rem;
@@ -77,7 +92,7 @@ li {
     cursor: pointer;
 }
 
-.header__navLogin:hover {
+.animation__profile:hover {
     background-color: #011b4c;
     transform: rotate(-3deg);
     cursor: pointer;
@@ -130,6 +145,7 @@ li {
 
 .header__mobileNav {
     display: none;
+    z-index: 999;
 }
 
 /* Styles for the open phone navigation */
@@ -302,6 +318,7 @@ li {
     background-color: #5992E3;
     border-radius: 2rem;
     color: white;
+    animation: fade-in 0.5s ease;
 }
 
 .homepage__headingContainer{
@@ -333,6 +350,17 @@ li {
     width: 10rem;
     height: auto;
     border-radius: 1rem;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* LOGIN PAGE: */
@@ -400,6 +428,333 @@ li {
 
 .login__register{
     font-size: 0.8rem;
+}
+
+/* ABOUT PAGINA */
+.about-section, .mission-section, .activities-section, .join-section {
+    padding: 15px 0px;
+    background-color: #f8f8f8;
+}
+
+/* Inhoudsstijl voor secties */
+.about-content, .mission-content, .activities-content, .join-content {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Kopstijl */
+.about-content h2, .mission-content h2, .activities-content h2, .join-content h2 {
+    font-size: 24px;
+    color: #0075b7;
+    margin-bottom: 20px;
+}
+
+/* Tekststijl */
+.about-content p, .mission-content p, .activities-content p, .join-content p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Lijststijl */
+.about-content ul, .mission-content ul, .activities-content ul, .join-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+/* Afbeeldingsstijl */
+.about-content img, .join-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+/* Mediaquery voor telefoonweergave */
+@media screen and (max-width: 480px) {
+    .about-content, .mission-content, .activities-content, .join-content {
+        padding: 10px;
+    }
+    .about-content h2, .mission-content h2, .activities-content h2, .join-content h2 {
+        font-size: 20px;
+    }
+    .about-content p, .mission-content p, .activities-content p, .join-content p {
+        font-size: 14px;
+    }
+}
+
+/* Informatie pagina */
+.info-section {
+    padding: 40px 0;
+    background-color: #f8f8f8;
+}
+
+/* Stijl voor de "Informatie" inhoud */
+.info-content {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Stijl voor de "Informatie" kop */
+.info-heading {
+    font-size: 24px;
+    color: #0075b7;
+    margin-bottom: 20px;
+}
+
+/* Stijl voor de "Informatie" subkop */
+.info-subheading {
+    font-size: 20px;
+    color: #0075b7;
+    margin-top: 20px;
+}
+
+/* Stijl voor de "Informatie" tekst */
+.info-text {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Stijl voor de "Informatie" knop */
+.info-button {
+    min-width: 10rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0075b7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.info-button:hover {
+    background-color: #005a8e;
+}
+
+/* Laat de knop naast de tekst staan voor schermen breder dan 480px */
+@media screen and (min-width: 480px) {
+    .info-subsection {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .info-button {
+        margin-top: 0;
+    }
+}
+
+/* Laat de knop onder de tekst verschijnen voor schermen smaller dan 480px (telefoon) */
+@media screen and (max-width: 480px) {
+    .info-subsection {
+        flex-direction: column;
+    }
+    .info-button {
+        margin-top: 5px;
+        width: 10rem;
+    }
+}
+
+/* Mediaquery voor telefoonweergave */
+@media screen and (max-width: 480px) {
+    .info-content {
+        padding: 10px;
+    }
+    .info-heading {
+        font-size: 20px;
+    }
+    .info-subheading {
+        font-size: 18px;
+    }
+    .info-text {
+        font-size: 14px;
+    }
+}
+
+/* PROFIEL */
+.profile-section {
+    padding: 40px 0;
+    background-color: #f8f8f8;
+}
+
+/* Inhoudsstijl voor profiel */
+.profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Kopstijl */
+.profile-content h2 {
+    font-size: 24px;
+    color: #0075b7;
+    margin-bottom: 20px;
+}
+
+/* Tekststijl voor profiel */
+.profile-content p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Labelstijl voor wachtwoordwijziging */
+.profile-content label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Invoervelden voor wachtwoordwijziging */
+.profile-content input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Knopstijl voor wachtwoordwijziging */
+.password-change-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0075b7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.password-change-button:hover {
+    background-color: #005a8e;
+    cursor: pointer;
+}
+
+/* Mediaquery voor telefoonweergave */
+@media screen and (max-width: 480px) {
+    .profile-content {
+        padding: 10px;
+    }
+    .profile-content h2 {
+        font-size: 20px;
+    }
+    .profile-content p,
+    .profile-content label,
+    .profile-content input {
+        font-size: 14px;
+    }
+    .password-change-button {
+        font-size: 14px;
+        width: 95vw;
+    }
+}
+
+.changePFPcontainer {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.title {
+    color: #0075b7;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.formpfp {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.custom-file-input {
+    display: none;
+}
+
+.inputflexie label {
+    background-color: #0075b7;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.flexie figure {
+    margin-top: 20px;
+}
+
+.pfp-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.success-message {
+    color: green;
+}
+
+.submit-button {
+    background-color: #0075b7;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0;
+    border: none;
+}
+
+.logout__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding-bottom: 4rem;
+}
+
+.logout__button {
+    background-color: #0075b7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout__buttonText {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.logout__button:hover {
+    background-color: #005b94;
+}
+
+@media screen and (max-width: 480px){
+    .logout__button{
+        width: 60vw;
+    }
 }
 
 

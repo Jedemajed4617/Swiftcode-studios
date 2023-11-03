@@ -1,16 +1,21 @@
 <?php
-session_start();
-
 require_once("../../src/db_conn.php");
 include("../functions.php");
 
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-} else {
-    $username = null; // Set to a default value if the session is not active
-}
+session_start();
 
 $pfp = GetPfpById($mysqli, $username);
+
+if (!isset($_SESSION["id"])) {
+    header("location: ../login/login.php");
+}
+
+$username = $_SESSION['username'];
+
+$pfp = GetPfpById($mysqli, $username);
+
+$email = GetEmailByUsername($mysqli, $username);
+
 ?>
 
 <!DOCTYPE html>
@@ -78,16 +83,15 @@ $pfp = GetPfpById($mysqli, $username);
             </ul>
 
             <ul class="header__navItems">
-                <li class="header__navLogin"><a
-                        href="<?php if (isset($_SESSION["id"])) {
-                            echo "../profile/profile.php";
-                        } else {
-                            echo "../login/login.php";
-                        } ?>"
-                        aria-label="Login">
+                <li class="header__navLogin"><a href="<?php if (isset($_SESSION["id"])) {
+                    echo "../profile/profile.php";
+                } else {
+                    echo "../login/login.php";
+                } ?>" aria-label="Login">
                         <?php if (!isset($_SESSION['username'])) { ?><i
                                 class="fa-regular fa-user animation__profile"></i>
-                        <?php } else { ?> <img class="peetje17" src="../../src/pfp/<?php echo $pfp; ?>" alt="" srcset="">
+                        <?php } else { ?> <img class="peetje17" src="../../src/pfp/<?php echo $pfp; ?>" alt=""
+                                srcset="">
                             <p style="font-size: 1rem; text-align: center;">
                                 <?php echo $username; ?>
                             </p>
@@ -102,78 +106,139 @@ $pfp = GetPfpById($mysqli, $username);
             <figure class="slogan__img">
                 <p class="slogan__imgCaption">
                     VN Forum is het digitale tijdschrift van de Nederlandse Vereniging voor de Verenigde Naties (NVVN).
+                    Doelstelling is het vergroten van kennis over de werking en invloed van de Verenigde Naties.
                 </p>
             </figure>
         </div>
     </section>
 
-    <section class="about-section">
-        <div class="about-content">
-            <h2>Over Ons</h2>
-            <p>Welkom bij de Nederlandse Vereniging voor de Verenigde Naties (NVVN). Wij zijn een toegewijde gemeenschap
-                van mensen die zich inzetten voor de idealen van de Verenigde Naties.</p>
-            <p>Onze missie is om bij te dragen aan een vreedzame, rechtvaardige en duurzame wereld. Al meer dan zeventig
-                jaar zijn wij betrokken bij internationale samenwerking en streven wij ernaar de VN-doelen te
-                verspreiden en te ondersteunen.</p>
-            <p>De NVVN is een platform voor dialoog, bewustwording en actie. Samen met onze partners en leden werken we
-                aan vrede, veiligheid, mensenrechten, klimaatverandering en duurzame ontwikkeling.</p>
-            <p>Wij geloven in de kracht van collectieve actie en de rol die elk individu kan spelen in het vormgeven van
-                een betere toekomst. Sluit je bij ons aan, en samen kunnen we de wereld veranderen.</p>
+    <section class="profile">
+        <div style="width: 100%; height: auto;">
+            <div
+                style="display: flex; justify-content: center; align-items: center; padding: 2rem; flex-direction: column;">
+                <h1>Welkom terug,
+                    <?php echo $username; ?>
+                </h1>
+                <p>Wat wilt u vandaag doen?</p>
+            </div>
         </div>
-    </section>
+        <section class="profile-section">
+            <div class="profile-content">
+                <div>
+                    <h2>Profielgegevens</h2>
+                    <p>Gebruikersnaam: <span class="profile-username">
+                            <?php echo $username; ?>
+                        </span></p>
+                    <p>E-mail:
+                        <span class="profile-email">
+                            <?php echo $email; ?>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <div>
+                    <h2>Wachtwoord wijzigen</h2>
+                    <p style="color: green;">
+                        <?php if (isset($_SESSION['pw_succes']) && $_SESSION['pw_succes']) {
+                            echo "Wachtwoord successvol veranderd.";
+                            unset($_SESSION['pw_succes']);
+                        } ?>
+                    </p>
+                    <p style="color: red;">
+                        <?php if (isset($_SESSION['pw_failed']) && $_SESSION['pw_failed']) {
+                            echo "Wachtwoorden komen niet overeen of oud wachtwoord is fout!";
+                            unset($_SESSION['pw_failed']);
+                        } ?>
+                    </p>
+                    <form id="password-change-form" action="../change_password.php" method="POST">
+                        <label for="old-password">Oud wachtwoord:</label>
+                        <input type="password" id="old-password" name="old-password" required>
 
-    <section class="mission-section">
-        <div class="mission-content">
-            <h2>Onze Missie</h2>
-            <p>Onze missie bij de NVVN is gericht op het bevorderen van de doelstellingen van de Verenigde Naties in
-                Nederland en wereldwijd. We zijn vastbesloten om de volgende gebieden aan te pakken:</p>
-            <ul>
-                <li>* Vrede en veiligheid</li>
-                <li>* Mensenrechten</li>
-                <li>* Duurzame ontwikkeling</li>
-                <li>* Klimaatverandering</li>
-            </ul>
-            <br>
-            <p>Met educatie, bewustwording, en samenwerking streven we ernaar om een positieve impact te hebben op deze
-                belangrijke mondiale kwesties.</p>
-        </div>
-    </section>
+                        <label for="new-password">Nieuw wachtwoord:</label>
+                        <input type="password" id="new-password" name="new-password" required>
 
-    <section class="activities-section">
-        <div class="activities-content">
-            <h2>Onze Activiteiten</h2>
-            <p>Als NVVN zijn we actief betrokken bij een breed scala aan activiteiten om onze missie te bevorderen.
-                Enkele van onze belangrijkste activiteiten omvatten:</p>
-            <ul>
-                <li>* Organisatie van evenementen en conferenties gericht op VN-doelen.</li>
-                <li>* Educatieve programma's en workshops om bewustwording te vergroten.</li>
-                <li>* Samenwerking met overheden, NGO's en andere organisaties voor gemeenschappelijke projecten.</li>
-                <li>* Bevordering van jeugdparticipatie en betrokkenheid bij mondiale vraagstukken.</li>
-            </ul>
-            <br>
-            <p>Samen werken we aan een betere toekomst voor de wereld en haar inwoners.</p>
-        </div>
-    </section>
+                        <label for="confirm-password">Herhaal nieuw wachtwoord:</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
 
-    <section class="join-section">
-        <div class="join-content">
-            <h2>Sluit Je Bij Ons Aan</h2>
-            <p>
-                Wil je ook deel uitmaken van onze gemeenschap en bijdragen aan een betere wereld? Word lid van de NVVN en
-                ontdek hoe jij je steentje kunt bijdragen aan internationale samenwerking en het bereiken van VN-doelen.
-            </p>
-            <p>
-                Samen kunnen we een verschil maken. Doe met ons mee en draag bij aan een vreedzame, rechtvaardige en
-                duurzame toekomst voor iedereen.
-            </p>
-            <div style="display: flex; gap: 2rem; align-items: center;">
-                <p>Deze website is mede mogelijk gemaakt door: Swiftcode Studios</p>
-                <img style="width: 3.5rem; height: 3.5rem; border-radius: 0.2rem;" src="../../src/img/scs.webp" alt="hallo">
+                        <button type="submit" class="password-change-button">Wachtwoord wijzigen</button>
+                    </form>
+                </div>
+                <br>
+                <div>
+                    <h2>Gebruikersnaam wijzigen</h2>
+                    <p style="color: green;">
+                        <?php if (isset($_SESSION['username_success']) && $_SESSION['username_success']) {
+                            echo "Gebruikersnaam successvol veranderd.";
+                            unset($_SESSION['username_success']);
+                        } ?>
+                    </p>
+                    <p style="color: red;">
+                        <?php if (isset($_SESSION['username_failed']) && $_SESSION['username_failed']) {
+                            echo "Er is een fout opgetreden, probeer opnieuw. Blijft dit gebeuren? Neem contact met ons op!";
+                            unset($_SESSION['username_failed']);
+                        } ?>
+                    </p>
+                    <p style="color: red;">
+                        <?php if (isset($_SESSION['not_allowed']) && $_SESSION['not_allowed']) {
+                            echo "Deze gebruikersnaam is niet toegestaan!";
+                            unset($_SESSION['not_allowed']);
+                        } ?>
+                    </p>
+                    <form id="username-change-form" action="../change_username.php" method="POST">
+                        <label for="new-username">Nieuwe gebruikersnaam:</label>
+                        <input type="text" id="new-username" name="new-username" required>
+                        <button type="submit" class="password-change-button">Gebruikersnaam wijzigen</button>
+                    </form>
+                </div>
+                <br>
+                <div>
+                    <h2>E-mailadres wijzigen</h2>
+                    <p style="color: green;">
+                        <?php if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
+                            echo "Email successvol veranderd.";
+                            unset($_SESSION['email_success']);
+                        } ?>
+                    </p>
+                    <p style="color: red;">
+                        <?php if (isset($_SESSION['email_failed']) && $_SESSION['email_failed']) {
+                            echo "Er is een fout opgetreden, probeer opnieuw. Blijft dit gebeuren? Neem contact met ons op!";
+                            unset($_SESSION['email_failed']);
+                        } ?>
+                    </p>
+                    <form id="email-change-form" action="../change_email.php" method="POST">
+                        <label for="new-email">Nieuw e-mailadres:</label>
+                        <input type="email" id="new-email" name="new-email" required>
+                        <button type="submit" class="password-change-button">E-mailadres wijzigen</button>
+                    </form>
+                </div>
+            </div>
+            <article class="changePFPcontainer">
+                <b class="title">Profielfoto wijzigen:</b>
+                <form class="formpfp" action="../changepfp.php" method="POST" enctype="multipart/form-data">
+                    <input class="custom-file-input" type="file" id="filetoUpload1" name="filetoUpload1"
+                        accept="image/png, image/jpeg">
+                    <label class="inputflexie" style="cursor:pointer;" for="filetoUpload1">Kies bestand +</label>
+                    <input class="submit-button" type="submit" value="Update Afbeelding">
+                </form>
+                <figure class="flexie">
+                    <img class="pfp-image" src="../../src/pfp/<?php echo $pfp; ?>" alt="">
+                </figure>
+                <p class="success-message">
+                    <?php if (isset($_SESSION['pfp_success']) && $_SESSION['pfp_success']) {
+                        echo "Profielfoto succesvol gewijzigd!";
+                        unset($_SESSION['pfp_success']);
+                    } ?>
+                </p>
+            </article>
+        </section>
+        <div class="logout__container">
+            <div class="logout__buttonContainer">
+                <button class="logout__button"><a class="logout__buttonText" href="/logout.php">Uitloggen</a></button>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="footer__container">
+    <footer class="footer__container">
         <div class="footer__content">
             <ul class="footer__list">
                 <form class="footer__listForm" method="post" action="">

@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+require_once("../../src/db_conn.php");
+include("../functions.php");
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+} else {
+    $username = null; // Set to a default value if the session is not active
+}
+
+$pfp = GetPfpById($mysqli, $username);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +43,22 @@
                     <li><a href="../sdg/sdg.php">SDG's</a></li>
                     <li><a href="../info/info.php">Informatie</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <?php
+                        if (isset($_SESSION["id"])) {
+                    ?>
+                    <li><a href="../profile/profile.php">Profile</a></li>
+                    <?php
+                        } 
+                        if (!isset($_SESSION["id"])) {
+                    ?>
                     <li><a href="../login/login.php">Login</a></li>
+                    <?php
+                        } else {
+                    ?>
+                    <li><a href="/logout.php">Logout</a></li>
+                    <?php
+                        }
+                    ?>
                     <li class="header__closeButton"><button id="closePhoneNav" aria-label="Close Mobile Navigation">&#10006;</button></li>
                 </ul>
             </div>
@@ -44,7 +74,7 @@
             </ul>
 
             <ul class="header__navItems">
-                <li class="header__navLogin"><a href="../login/login.php" aria-label="Login"><i class="fa-regular fa-user"></i></a></li>
+            <li class="header__navLogin"><a href="<?php if (isset($_SESSION["id"])) { echo "../profile/profile.php"; } else{ echo "../login/login.php"; } ?>" aria-label="Login"><?php if (!isset($_SESSION['username'])) { ?><i class="fa-regular fa-user animation__profile"></i><?php } else{ ?> <img class="peetje17" src="../../src/pfp/<?php echo $pfp; ?>" alt="" srcset=""> <p style="font-size: 1rem; text-align: center;"><?php echo $username; ?></p><?php } ?></a></li>
             </ul>
         </nav>
     </header>
@@ -77,7 +107,17 @@
                 <li class="footer__listLinks"><a href="../about/about.php" class="footer__listLinkA">Over Ons</a></li>
                 <li class="footer__listLinks"><a href="../sdg/sdg.php" class="footer__listLinkA">SDG's</a></li>
                 <li class="footer__listLinks"><a href="../info/info.php" class="footer__listLinkA">Informatie</a></li>
+                <?php 
+                    if (!isset($_SESSION["id"])) {
+                ?>
                 <li class="footer__listLinks"><a href="../login/login.php" class="footer__listLinkA">Login</a></li>
+                <?php
+                    } else {
+                ?>
+                <li class="footer__listLinks"><a href="/logout.php" class="footer__listLinkA">Logout</a></li>
+                <?php
+                    }
+                ?>
             </ul>
             <ul class="footer__list socials">
                 <li class="footer__listSocials">
