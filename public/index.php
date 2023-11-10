@@ -29,7 +29,7 @@ include_once("../src/db_conn.php");
                 <ul class="header__phoneNav" aria-label="Mobile Navigation Menu">
                     <li><a href="../index.php">Home</a></li>
                     <li><a href="./about/about.php">Over ons</a></li>
-                    <li><a href="./sdg/sdg.php">SDG's</a></li>
+                    <li><a href="./sdg/index.php">SDG's</a></li>
                     <li><a href="./info/info.php">Informatie</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="./login/login.php">Login</a></li>
@@ -42,7 +42,7 @@ include_once("../src/db_conn.php");
             </ul>
 
             <ul class="header__navItems">
-                <li class="header__navLinks"><a href="./sdg/sdg.php" class="header__navLinkItem">SDG's</a></li>
+                <li class="header__navLinks"><a href="SDG template/index.php" class="header__navLinkItem">SDG's</a></li>
                 <li class="header__navLinks"><a href="./info/info.php" class="header__navLinkItem">Informatie</a></li>
                 <li class="header__navLinks"><a href="./about/about.php" class="header__navLinkItem">Over Ons</a></li>
             </ul>

@@ -22,8 +22,8 @@ USE `SwiftCodeStudios`;
 -- Dumping structure for table SwiftCodeStudios.featured
 CREATE TABLE IF NOT EXISTS `featured` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `img` varchar(256) NOT NULL,
+  `title` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

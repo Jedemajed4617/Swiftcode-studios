@@ -3,19 +3,20 @@ require('db_conn.php');
 $sql = 'SELECT * FROM featured';
 $result = $conn->query($sql);
 $image_path = array();
-$cardHtml = '';
+$cardtemplate = '';
 
 $infotext = array();
+$title = array();
+$id = array();
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $image_path[] = $row['img'];
-    $infotext[] = $row['title'];
+    $id[] = $row['ID'];
+    $image_path[] = $row['IMG'];
+    $title[] = $row['TITTLE'];
+    $infotext[] = $row['INFOTEXT'];
 }
-echo '<li style="background: #f6bd60;"><img src="'. $image_path[0] .'" alt="'. $infotext[0].'"></li>';
-for ($i=1; $i < 17; $i++) { 
-    $cardHtml .= '<li style="background: #f6bd60;"><img src="'. $image_path[$i] .'" alt="'. $infotext[$i] .'"></li>';
+for ($i=0; $i < 17; $i++) { 
+    $cardtemplate = '<a href="template_ying.php?id=' . $id[$i] . '">';
+    $cardtemplate .= '<img src="'. $image_path[$i] .'" alt="'. $title[$i] .'"><p class="text-style"> '. $infotext[$i] . '</p></li>';
+    echo $cardtemplate;
 }
-
-echo $cardHtml;
-
-
