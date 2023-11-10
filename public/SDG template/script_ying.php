@@ -7,26 +7,14 @@ $stmt->bind_param("i", $id);
 $stmt->execute();
 
 $result = $stmt->get_result();
-
-$image_paths = '';
-$infotext = '';
-$title = '';
-
-
-while ($row = mysqli_fetch_assoc($result)) {
-    $image_paths = $row['IMG'];
-    $title  = $row['TITTLE'];
-    $infotext = $row['INFOTEXT'];
-}
+$sdg = mysqli_fetch_assoc($result);
 
 echo '
 <section class="sdg">
-    <img class="img" src="'.$image_paths.'" alt="sdg cards">
+    <img class="img" src="'.$sdg["IMG"].'" alt="sdg cards">
     <article class="sdg">
-        <h1>'.$title.'</h1>
-        <h2 class="container__h2">'.$infotext.'</h2>
+        <h1>'.$sdg["TITTLE"].'</h1>
+        <h2 class="container__h2">'.$sdg["INFOTEXT"].'</h2>
     </article>
 </section>
-</body>
-</html>
 ';
